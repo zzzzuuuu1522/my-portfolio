@@ -1,0 +1,62 @@
+---
+const { githubUrl = "", demoUrl = "" } = Astro.props;
+const completedItems = [
+  "基于 Astro 模板进行个人化改造",
+  "实现桌面端侧栏与移动端抽屉导航",
+  "完成首页、项目、博客、简历等基础页面结构",
+  "优化基础 SEO 与响应式布局",
+];
+const plannedItems = [
+  "部署至 Cloudflare Pages",
+  "补充 Java 后端与全栈项目",
+  "持续记录学习笔记与项目复盘",
+];
+---
+
+<article class="rounded-xl border border-base-300 bg-base-100 p-5 shadow-sm sm:p-6">
+  <header class="flex flex-wrap items-center gap-3">
+    <h3 class="text-xl font-bold sm:text-2xl">个人作品集网站</h3>
+    <span class="badge badge-secondary badge-outline">开发中</span>
+  </header>
+
+  <p class="mt-3 leading-relaxed text-base-content/80">
+    用于展示个人学习经历、项目实践与技术文章的静态个人网站。
+  </p>
+
+  <div class="mt-4 flex flex-wrap gap-2" aria-label="项目技术栈">
+    {['Astro', 'Tailwind CSS', 'Git'].map((technology) => <span class="badge badge-outline">{technology}</span>)}
+  </div>
+
+  <div class="mt-6 grid gap-6 md:grid-cols-2">
+    <section aria-labelledby="completed-title">
+      <h4 id="completed-title" class="font-bold">已完成内容</h4>
+      <ul class="mt-2 list-disc space-y-2 pl-5 text-base-content/80">
+        {completedItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section aria-labelledby="planned-title">
+      <h4 id="planned-title" class="font-bold">后续计划</h4>
+      <ul class="mt-2 list-disc space-y-2 pl-5 text-base-content/80">
+        {plannedItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  </div>
+
+  {
+    (githubUrl || demoUrl) && (
+      <div class="mt-6 flex flex-wrap gap-3">
+        {githubUrl && (
+          <a class="btn btn-outline btn-sm" href={githubUrl} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+        )}
+        {demoUrl && (
+          <a class="btn btn-outline btn-sm" href={demoUrl} target="_blank" rel="noopener noreferrer">
+            在线演示
+          </a>
+        )}
+      </div>
+    )
+  }
+</article>

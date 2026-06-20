@@ -1,81 +1,93 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import PortfolioProject from "../components/PortfolioProject.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
+import { existsSync } from "node:fs";
+import { PROFILE } from "../config";
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const last_posts = posts.slice(0, 3);
+const resumeAvailable = existsSync(new URL("../../public/resume.pdf", import.meta.url));
 ---
 
 <BaseLayout sideBarActiveItemID="home">
-  <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Hey there 👋</div>
-    <div class="text-5xl font-bold">我是  邹雨婷</div>
-    <div class="text-3xl py-3 font-bold">物联网工程专业本科生 - 寻找全栈开发实习</div>
-    <div class="py-2">
-      <text class="text-lg">
-        我是一名计算机专业本科生，正在学习全栈开发。
-        <br/>
-        目前专注于 Java、Spring Boot、Vue3、MySQL 和 Git，
-        希望寻找一份全栈开发实习。
-      </text>
-    </div>
-    <div class="mt-8">
-      <a class="btn" href="mailto:1038003259@qq.com">
-      联系我
+  <section class="mt-2 pb-12 sm:mt-5 sm:pb-16" aria-labelledby="hero-title">
+    <p class="mb-2 text-base font-medium text-base-content/70 sm:text-lg">你好，我是 {PROFILE.name} 👋</p>
+    <h1 id="hero-title" class="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+      {PROFILE.identity}｜寻找 Java 后端 / 全栈开发实习
+    </h1>
+    <p class="mt-5 max-w-3xl text-base leading-relaxed text-base-content/80 sm:text-lg">
+      我正在学习并实践 Java、Spring Boot、Vue 3、MySQL 与 Git，<br class="hidden sm:block" />
+      希望通过真实可部署的项目积累全栈开发经验。
+    </p>
+
+    <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <a
+        class="btn btn-primary hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        href="/projects"
+      >
+        查看项目
       </a>
-      <a href="https://github.com/manuelernestog/astrofy" target="_blank" class="btn btn-outline ml-5">
-        Get This template
-      </a>
+      {resumeAvailable ? (
+        <a
+          href={PROFILE.resumePath}
+          download
+          class="btn btn-outline hover:bg-base-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          下载简历
+        </a>
+      ) : (
+        <span class="self-center text-sm text-base-content/60" title="添加真实简历后即可下载">
+          简历准备中
+        </span>
+      )}
+      {
+        PROFILE.email && (
+          <a
+            class="btn btn-ghost hover:bg-base-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            href="#contact"
+          >
+            联系我
+          </a>
+        )
+      }
     </div>
-  </div>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
-  </div>
+    {
+      PROFILE.email && (
+        <p id="contact" class="mt-5 scroll-mt-24 text-sm text-base-content/70">
+          邮箱：<a class="link link-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
+        </p>
+      )
+    }
+  </section>
 
-  <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
+  <section aria-labelledby="projects-title">
+    <h2 id="projects-title" class="mb-2 w-full text-2xl font-bold sm:text-3xl">项目经历 {"</>"}</h2>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-  </div>
+    <PortfolioProject />
+  </section>
 
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
+  <section aria-labelledby="blog-title">
+    <h2 id="blog-title" class="mb-5 mt-10 w-full text-2xl font-bold sm:text-3xl">最新博客</h2>
+
+    {
+      last_posts.map((post) => (
+        <>
+          <HorizontalCard
+            title={post.data.title}
+            img={post.data.heroImage}
+            desc={post.data.description}
+            url={"/blog/" + createSlug(post.data.title, post.slug)}
+            target="_self"
+            badge={post.data.badge}
+          />
+          <div class="divider my-0" />
+        </>
+      ))
+    }
+  </section>
 </BaseLayout>

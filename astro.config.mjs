@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://astrofy-template.netlify.app',
-  integrations: [mdx(), sitemap(), tailwind()]
+  // TODO: 部署前替换为正式域名，并同步修改 src/config.ts 与 public/robots.txt。
+  site: 'https://TODO-REPLACE-ME.example.com',
+  integrations: [mdx(), tailwind()]
 });
