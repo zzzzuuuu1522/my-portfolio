@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
 import { existsSync } from "node:fs";
 import { PROFILE } from "../config";
+import { projects } from "../data/projects";
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -68,7 +69,9 @@ const resumeAvailable = existsSync(new URL("../../public/resume.pdf", import.met
   <section aria-labelledby="projects-title">
     <h2 id="projects-title" class="mb-2 w-full text-2xl font-bold sm:text-3xl">项目经历 {"</>"}</h2>
 
-    <PortfolioProject />
+    <div class="grid gap-5">
+      {projects.map((project) => <PortfolioProject project={project} compact />)}
+    </div>
   </section>
 
   <section aria-labelledby="blog-title">

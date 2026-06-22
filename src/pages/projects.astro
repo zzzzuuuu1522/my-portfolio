@@ -1,9 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PortfolioProject from "../components/PortfolioProject.astro";
+import { projects } from "../data/projects";
 ---
 
 <BaseLayout title = "Projects" sideBarActiveItemID="projects">
   <h1 class="mb-5 w-full text-3xl font-bold">项目经历</h1>
-  <PortfolioProject />
+  <div class="grid gap-6">
+    {projects.map((project) => <PortfolioProject project={project} />)}
+  </div>
 </BaseLayout>
