@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: 部署前将下面的占位域名替换为正式域名。
-Sitemap: https://TODO-REPLACE-ME.example.com/sitemap.xml
+Sitemap: https://zzzzuuuu1522.github.io/my-portfolio/sitemap-index.xml

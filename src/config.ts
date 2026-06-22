@@ -9,8 +9,7 @@ export const PROFILE = {
   github: "",
   // TODO: 填写完整 LinkedIn 主页地址。
   linkedin: "",
-  // TODO: 部署前替换为正式域名，并同步修改 astro.config.mjs 与 public/robots.txt。
-  siteUrl: "https://TODO-REPLACE-ME.example.com",
+  siteUrl: "https://zzzzuuuu1522.github.io/my-portfolio/",
   resumePath: "/resume.pdf",
 } as const;
 

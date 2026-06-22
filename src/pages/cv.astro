@@ -2,6 +2,7 @@
 import { existsSync } from "node:fs";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { PROFILE } from "../config";
+import withBase from "../lib/withBase";
 
 const resumeAvailable = existsSync(new URL("../../public/resume.pdf", import.meta.url));
 ---
@@ -10,7 +11,7 @@ const resumeAvailable = existsSync(new URL("../../public/resume.pdf", import.met
   <div class="mb-5 flex items-center justify-between gap-4">
     <div class="text-3xl w-full font-bold">个人简历</div>
     {resumeAvailable ? (
-      <a class="btn btn-outline" href={PROFILE.resumePath} download>下载简历</a>
+      <a class="btn btn-outline" href={withBase(PROFILE.resumePath)} download>下载简历</a>
     ) : (
       <span class="btn btn-outline btn-disabled" aria-disabled="true" title="TODO：请将真实简历放入 public/resume.pdf">
         简历待上传

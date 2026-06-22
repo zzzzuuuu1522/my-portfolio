@@ -3,6 +3,7 @@ import SideBarFooter from "./SideBarFooter.astro";
 import { Image } from "astro:assets";
 import SideBarMenu from "./SideBarMenu.astro";
 import { PROFILE } from "../config";
+import withBase from "../lib/withBase";
 const { sideBarActiveItemID } = Astro.props;
 ---
 
@@ -10,10 +11,10 @@ const { sideBarActiveItemID } = Astro.props;
   <label for="my-drawer" class="drawer-overlay" aria-label="关闭导航菜单"></label>
   <aside class="flex h-auto min-h-full w-[min(19rem,85vw)] flex-col bg-base-200 px-2 pt-2 text-base-content sm:w-[19rem]">
     <div class="w-fit mx-auto mt-5 mb-6">
-      <a href="/">
+      <a href={withBase('/')}>
         <div class="avatar transition ease-in-out hover:scale-[102%] block m-auto">
           <div class="w-[8.5rem]">
-            <Image class="mask mask-circle" format="webp" width={300} height={300} src="/my-photo.jpg" alt={`${PROFILE.name}的个人头像`} />
+            <Image class="mask mask-circle" format="webp" width={300} height={300} src={withBase('/my-photo.jpg')} alt={`${PROFILE.name}的个人头像`} />
           </div>
         </div>
       </a>

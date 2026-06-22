@@ -1,5 +1,6 @@
 ---
 import { PROFILE } from "../config";
+import withBase from "../lib/withBase";
 ---
 
 <div
@@ -18,7 +19,7 @@ import { PROFILE } from "../config";
       </label>
     </div>
     <div class="navbar-center">
-      <a class="btn btn-ghost normal-case text-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-xl" href="/">{PROFILE.name} ⚡️</a>
+      <a class="btn btn-ghost normal-case text-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-xl" href={withBase('/')}>{PROFILE.name} ⚡️</a>
     </div>
     <div class="navbar-end"></div>
   </div>

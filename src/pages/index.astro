@@ -7,6 +7,7 @@ import createSlug from "../lib/createSlug"
 import { existsSync } from "node:fs";
 import { PROFILE } from "../config";
 import { projects } from "../data/projects";
+import withBase from "../lib/withBase";
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -28,13 +29,13 @@ const resumeAvailable = existsSync(new URL("../../public/resume.pdf", import.met
     <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
       <a
         class="btn btn-primary hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        href="/projects"
+        href={withBase('/projects')}
       >
         查看项目
       </a>
       {resumeAvailable ? (
         <a
-          href={PROFILE.resumePath}
+          href={withBase(PROFILE.resumePath)}
           download
           class="btn btn-outline hover:bg-base-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
@@ -84,7 +85,7 @@ const resumeAvailable = existsSync(new URL("../../public/resume.pdf", import.met
             title={post.data.title}
             img={post.data.heroImage}
             desc={post.data.description}
-            url={"/blog/" + createSlug(post.data.title, post.slug)}
+            url={withBase("/blog/" + createSlug(post.data.title, post.slug))}
             target="_self"
             badge={post.data.badge}
           />

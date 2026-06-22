@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import withBase from "../lib/withBase";
 ---
 
 <BaseLayout title="页面已停用">
   <div class="text-3xl w-full font-bold mb-5">页面已停用</div>
-  <p>此页面不属于当前求职作品集，请前往<a class="link ml-1" href="/projects">项目经历</a>。</p>
+  <p>此页面不属于当前求职作品集，请前往<a class="link ml-1" href={withBase('/projects')}>项目经历</a>。</p>
 </BaseLayout>
