@@ -1,6 +1,6 @@
 {
-  "name": "astrofy",
-  "description": "Astrofy is a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS. Create in minutes a website with Blog, CV, Project Section, Store and RSS Feed.",
+  "name": "zou-yuting-portfolio",
+  "description": "邹雨婷的 Java 后端与全栈开发实习求职作品集。",
   "type": "module",
   "version": "3.0.0",
   "private": true,
